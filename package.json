@@ -1,0 +1,28 @@
+{
+  "name": "demoapp",
+  "version": "1.0.0",
+  "description": "This project is a sample application demonstrating a more fully developed realistic single page angular application.",
+  "main": "app/model/index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Joe Eames & Jim Cooper",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "bootstrap": "^4.5.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-handlebars": "^5.1.0",
+    "mariadb": "^2.4.1",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.1.0",
+    "nodemon": "^2.0.4",
+    "patch": "0.0.1",
+    "sequelize": "^6.3.3",
+    "sync": "^0.2.5"
+  }
+}
