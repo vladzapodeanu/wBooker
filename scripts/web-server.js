@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const path = require('path');
 
 const app = express();
 
@@ -25,8 +26,24 @@ db.sequelize.sync();
 });
 
 // simple route
-app.get("/", (req, res) => {
-    res.json({ message: "Welcome to bezkoder application." });
+/*app.get("/", (req, res) => {
+    res.json({ message: "Welcome to booker application." });
+});*/
+
+app.get('/', function(req, res) {
+    res.sendFile(path.resolve('app/index.html'));
+});
+
+app.get('/login', function(req, res) {
+    res.sendFile(path.resolve('app/templates/login.html'));
+});
+
+app.get('/booking', function(req, res) {
+    res.sendFile(path.resolve('app/templates/booking.html'));
+});
+
+app.get('/profile', function(req, res) {
+    res.sendFile(path.resolve('app/templates/profile.html'));
 });
 
 require("../app/route/turorial.route")(app);
@@ -36,6 +53,8 @@ const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}.`);
 });
+
+
 /*
 const express = require('express');
 const bodyParser = require('body-parser');
