@@ -1,5 +1,5 @@
 module.exports = app => {
-    const tutorials = require("../controllers/LoginCtrl.js");
+    const tutorials = require("../js/controllers/LoginCtrl.js");
 
     var router = require("express").Router();
 
