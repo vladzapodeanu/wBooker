@@ -4,7 +4,7 @@ const eventsApp = angular.module('eventsApp', ['ngResource', 'ngRoute'])
     .config(function($routeProvider, $locationProvider) {
         $routeProvider.when('/login',
             {
-                templateUrl:'templates/login.html',
+                templateUrl:'login.html',
                 controller: 'LoginCtrl'
             });
         $routeProvider.when('/booking',

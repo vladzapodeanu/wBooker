@@ -1,0 +1,99 @@
+/* app css stylesheet */
+.hoverwell:hover {
+    background-color: #52575c;
+    cursor: pointer;
+}
+select, textarea {
+    color: #52575c;
+}
+.container_app {
+    border: 2px solid darkgreen;
+    width: 60%;
+    margin: auto;
+    padding-top: 80px;
+    padding-bottom: 40px;
+     opacity: 0.7;
+    border-radius: 10px;
+
+}
+
+.navbar-nav{
+
+}
+.well-title {
+    margin-top: 0px;
+}
+.session {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.votingWidget {
+    height: 64px;
+    padding: 7px;
+}
+
+.votingButton {
+    padding-left:6px;
+    cursor:pointer;
+}
+
+.blue {
+    color:blue;
+}
+
+.container{
+    width: 30%;
+
+    margin: auto;
+    padding-top: 30px;
+    padding-bottom: 40px;
+    background-color: grey;
+    opacity: 0.9;
+    border-radius: 40px;
+    text-align: center;
+}
+.calendar{
+    border: 1px solid #555;
+    width: 238px;
+}
+.calendar .row {
+    margin-left: 0px;
+}
+.calendar .row div{
+    float:left;
+    padding:2px;
+    width:30px;
+    text-align:center;
+}
+.calendar-nav-left {
+    float:left;
+    width: 20px;
+    padding:2px;
+}
+.calendar-nav-right {
+    float:left;
+    width: 20px;
+    padding:2px;
+    text-align:right;
+}
+
+.calendar .row .calendar-hdr {
+    padding:2px;
+    float:left;
+    width: 166px;
+    text-align:center;
+}
+.pointer {
+    cursor: pointer;
+}
+.date-picker {
+    position: absolute;
+    top: -7px;
+    left: 209px;
+    background-color: #272b30;
+}

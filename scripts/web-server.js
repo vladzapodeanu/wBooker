@@ -29,6 +29,7 @@ db.sequelize.sync();
 /*app.get("/", (req, res) => {
     res.json({ message: "Welcome to booker application." });
 });*/
+app.use(express.static(path.join(__dirname, '../app')));
 
 app.get('/', function(req, res) {
     res.sendFile(path.resolve('app/index.html'));
@@ -46,7 +47,19 @@ app.get('/profile', function(req, res) {
     res.sendFile(path.resolve('app/templates/profile.html'));
 });
 
-require("../app/route/turorial.route")(app);
+require("../app/route/account.route")(app);
+require("../app/route/booking.route")(app);
+require("../app/route/cartype.route")(app);
+
+require("../app/route/company.route")(app);
+require("../app/route/driverstatus.route")(app);
+require("../app/route/log.route")(app);
+
+require("../app/route/price.route")(app);
+require("../app/route/user.route")(app);
+require("../app/route/voucher.route")(app);
+
+
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;

@@ -19,6 +19,15 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
-db.tutorials = require("./tutorial.model.js")(sequelize, Sequelize);
+db.account = require('./account.model.js')(sequelize, Sequelize);
+db.booking = require('./booking.model.js')(sequelize, Sequelize);
+db.cartype = require('./cartype.model.js')(sequelize, Sequelize);
+db.company = require('./company.model.js')(sequelize, Sequelize);
+db.driverstatus = require('./driverStatus.model.js')(sequelize, Sequelize);
+db.log = require('./log.model.js')(sequelize,Sequelize);
+db.price = require('./price.model.js')(sequelize, Sequelize);
+db.user = require('./user.model.js')(sequelize, Sequelize);
+db.voucher = require('./voucher.model.js')(sequelize, Sequelize);
+
 
 module.exports = db;

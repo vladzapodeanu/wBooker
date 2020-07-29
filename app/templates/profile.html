@@ -1,12 +1,29 @@
 <!doctype html>
-<html ng-app="eventsApp">
+<html lang="en">
 <head>
     <base href="/"/>
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/lib/jquery-ui-1.11.4.custom/jquery-ui.css">
+    <link rel="stylesheet" href="/css/app.css"/>
+</head>
 
-<body ng-controller="ProfileCtrl" >
-<div class="container">
+
+<body class="container_app"  ng-app="eventsApp">
+<div class="container" ng-controller="userCtrl" >
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ngb-ul class="navbar-nav ">
+            <ngb-li class="nav-item active">
+                <a class="nav-link" href="/" ng-click="createBooking()">Home <span class="sr-only" ></span></a>
+            </ngb-li>
+            <ngb-li class="nav-item">
+                <a class="nav-link" href="/login" ng-click="createLogin()">Login</a>
+            </ngb-li>
+            <ngb-li class="nav-item">
+                <a class="nav-link" href="/profile" ng-click="editProfile()">My Profile</a>
+            </ngb-li>
+            <ngb-li class="nav-item">
+                <a class="nav-link" href="/booking" ng-click="createBooking()">New Booking</a>
+            </ngb-li>
+        </ngb-ul>
+    </div>
     <div id="signup">
         <div class="signup-screen">
             <div class="space-bot text-center">
@@ -48,7 +65,7 @@
 <script src="/lib/angular/angular-route.min.js"></script>
 <script src="/lib/underscore-1.4.4.min.js"></script>
 <script src="/js/app.js"></script>
-<script src="/js/controllers/ProfileCtrl.js"></script>
+<script src="/js/controllers/profileCtrl.js"></script>
 <script src="/js/filters.js"></script>
 <script src="/lib/bootstrap.min.js"></script>
 
