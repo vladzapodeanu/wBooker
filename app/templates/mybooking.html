@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <base href="/"/>
+    <link rel="stylesheet" href="/css/app.css"/>
+</head>
+
+
+<body class="container_app"  ng-app="eventsApp">
+<div class="container" ng-controller="Controller" >
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ngb-ul class="navbar-nav ">
+            <ngb-li class="nav-item">
+                <a class="nav-link" href="/login" >Login</a>
+            </ngb-li>
+            <ngb-li class="nav-item">
+                <a class="nav-link" href="/profile" >My Profile</a>
+            </ngb-li>
+            <ngb-li class="nav-item">
+                <a class="nav-link" href="/booking" >Booking</a>
+            </ngb-li>
+            <ngb-li class="nav-item">
+                <a class="nav-link" href="/my-booking" >My Booking</a>
+            </ngb-li>
+        </ngb-ul>
+    </div>
+    <div id="signup">
+        <div class="signup-screen">
+            <div class="space-bot text-center">
+                <div style="display: flex">
+                    <h1>My Booking</h1>
+                </div>
+                <div>
+                    <form class="form-register" method="post" name="register" novalidate>
+
+                        <div class="my-booking">
+                            <label for="my-booking"></label>
+                            <input id="my-booking" type="text" class="validate" required disabled>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

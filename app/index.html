@@ -1,47 +1,35 @@
 <!doctype html>
 <html lang="en">
 <head>
-<!--    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>-->
-<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>-->
-<!--    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>-->
-<!--    <base href="/"/>-->
-<!--    <link rel="stylesheet" href="/css/bootstrap.min.css">-->
-<!--    <link rel="stylesheet" href="/css/app.css">-->
-<!--    <link rel="stylesheet" href="/lib/jquery-ui-1.11.4.custom/jquery-ui.css">-->
+
     <link rel="stylesheet" href="/css/app.css"/>
     <title>Login</title>
 </head>
 
 
 <body class="container_app" ng-cloak ng-app="eventsApp">
-<div class="container_navbar">
+<div class="container"  ng-controller="MainMenuController" >
     <ngb-nav class="navbar navbar-expand-lg navbar-light bg-light">
         <ngb-button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </ngb-button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ngb-ul class="navbar-nav ">
-                <ngb-li class="nav-item active">
-                    <a class="nav-link" href="/" ng-click="createBooking()">Home <span class="sr-only" ></span></a>
-                </ngb-li>
-
                 <ngb-li class="nav-item">
-                    <a class="nav-link" href="/login" ng-click="createLogin()">Login</a>
+                    <a class="nav-link" href="/login" >Login</a>
                 </ngb-li>
-
                 <ngb-li class="nav-item">
-                    <a class="nav-link" href="/profile" ng-click="editProfile()">My Profile</a>
+                    <a class="nav-link" href="/profile" >My Profile</a>
                 </ngb-li>
-
                 <ngb-li class="nav-item">
-                    <a class="nav-link" href="/booking" ng-click="createBooking()">New Booking</a>
+                    <a class="nav-link" href="/booking" >Booking</a>
+                </ngb-li>
+                <ngb-li class="nav-item">
+                    <a class="nav-link" href="/my-booking" >My Booking</a>
                 </ngb-li>
             </ngb-ul>
         </div>
     </ngb-nav>
-
-
-
 </div>
 
 

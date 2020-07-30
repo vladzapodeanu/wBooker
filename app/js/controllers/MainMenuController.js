@@ -14,6 +14,10 @@ eventsApp.controller('MainMenuController',
             $location.replace();
             $location.url('/booking');
         };
+        $scope.viewBooking = function() {
+            $location.replace();
+            $location.url('/my-booking');
+        };
         $scope.createLogin = function() {
             $location.replace();
             $location.url('/login');

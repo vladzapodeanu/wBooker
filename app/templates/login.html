@@ -3,60 +3,56 @@
 <head>
 
     <meta charset="utf-8">
-<!--
-    <script src="/lib/jquery.min.js"></script>
-    <script src="/lib/underscore-1.4.4.min.js"></script>
-    <script src="/lib/bootstrap.min.js"></script>
-    <script src="/lib/angular/angular.js"></script>
-    <script src="/js/app.js"></script>
-    <script src="https://rawgithub.com/gsklee/ngStorage/master/ngStorage.js"></script>-->
     <link rel="stylesheet" href="/css/app.css"/>
 
 
 </head>
 
 <body class="container_app" ng-app="eventsApp">
-<div class="container" ng-controller="userCtrl" >
-    <title>Login</title>
+<div class="container" ng-controller="Controller" >
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ngb-ul class="navbar-nav ">
+            <ngb-li class="nav-item">
+                <a class="nav-link" href="/login" >Login</a>
+            </ngb-li>
+            <ngb-li class="nav-item">
+                <a class="nav-link" href="/profile" >My Profile</a>
+            </ngb-li>
+            <ngb-li class="nav-item">
+                <a class="nav-link" href="/booking" >Booking</a>
+            </ngb-li>
+            <ngb-li class="nav-item">
+                <a class="nav-link" href="/my-booking" >My Booking</a>
+            </ngb-li>
+        </ngb-ul>
+    </div>
+
     <div class="text-center">
+        <title>Login</title>
         <div style="display: flex">
             <h1>Login</h1>
         </div>
     </div>
-    <div class="collapse navbar-collapse" id="navbarNav">
-        <ngb-ul class="navbar-nav ">
-            <ngb-li class="nav-item active">
-                <a class="nav-link" href="/" ng-click="createBooking()">Home <span class="sr-only" ></span></a>
-            </ngb-li>
-            <ngb-li class="nav-item">
-                <a class="nav-link" href="/login" ng-click="createLogin()">Login</a>
-            </ngb-li>
-            <ngb-li class="nav-item">
-                <a class="nav-link" href="/profile" ng-click="editProfile()">My Profile</a>
-            </ngb-li>
-            <ngb-li class="nav-item">
-                <a class="nav-link" href="/booking" ng-click="createBooking()">New Booking</a>
-            </ngb-li>
-        </ngb-ul>
-    </div>
-   <form class="form-login" method="post" name="login" novalidate>
+   <form class="input" method="post" name="login" novalidate>
         <div class="form-group">
             <label for="email">Email address</label>
-            <input id="email" type="email" class="form-control" name="type" aria-describedby="emailHelp" class="validate" required>
+            <input id="email" type="email" class="form-control" name="type" aria-describedby="emailHelp" ng-show="form-register.email.$error.email" class="validate" required>
         </div>
-        <p class="form-group" ng-show="form-register.email.$error.email"></p>
 
         <div class="form-group">
             <label for="password">Password</label>
-            <input type="password" class="form-control" id="password" name="type" ng-model="password" ng-minlength='6' class="validate" required>
+            <input type="password" class="form-control" id="password" name="type" ng-model="password" ng-minlength='6' ng-show="form-register.password.$error.minlength || form.password.$invalid" class="validate" required>
         </div>
-        <p class="password" ng-show="form-register.password.$error.minlength || form.password.$invalid">Your password must be at least 6 characters.</p>
 
-        <div class="space-top text-left">
-            <button ng-disabled="form-register.$invalid" class="waves-effect waves-light btn done">
-                <li><a href="#" ng-click="create()" class="material-icons left">Login</a></li>
-            </button>
-        </div>
+
+       <div class="space-top text-left">
+           <button ng-disabled="form-register.$invalid" class="waves-effect waves-light btn done">
+               <i class="material-icons left" ng-click="initMyProfile()" >Connect</i>
+           </button>
+           <button type="button" class="waves-effect waves-light btn cancel">
+               <i class="material-icons left" ng-click="errorCallBack()">Cancel</i>
+           </button>
+       </div>
     </form>
 
 </div>

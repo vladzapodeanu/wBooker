@@ -7,20 +7,20 @@
 
 
 <body class="container_app"  ng-app="eventsApp">
-<div class="container" ng-controller="userCtrl" >
+<div class="container" ng-controller="Controller" >
     <div class="collapse navbar-collapse" id="navbarNav">
         <ngb-ul class="navbar-nav ">
-            <ngb-li class="nav-item active">
-                <a class="nav-link" href="/" ng-click="createBooking()">Home <span class="sr-only" ></span></a>
+            <ngb-li class="nav-item">
+                <a class="nav-link" href="/login" >Login</a>
             </ngb-li>
             <ngb-li class="nav-item">
-                <a class="nav-link" href="/login" ng-click="createLogin()">Login</a>
+                <a class="nav-link" href="/profile" >My Profile</a>
             </ngb-li>
             <ngb-li class="nav-item">
-                <a class="nav-link" href="/profile" ng-click="editProfile()">My Profile</a>
+                <a class="nav-link" href="/booking" >Booking</a>
             </ngb-li>
             <ngb-li class="nav-item">
-                <a class="nav-link" href="/booking" ng-click="createBooking()">New Booking</a>
+                <a class="nav-link" href="/my-booking" >My Booking</a>
             </ngb-li>
         </ngb-ul>
     </div>
@@ -53,21 +53,21 @@
                             <input id="email" type="email" class="form-control" name="type" aria-describedby="emailHelp" class="validate" required>
                         </div>
                         <p class="form-group" ng-show="form-register.email.$error.email"></p>
+                        <div class="space-top text-left">
+                            <button ng-disabled="form-register.$invalid" class="waves-effect waves-light btn done">
+                                <i class="material-icons left" ng-click="update()" >Edit</i>
+                            </button>
+                            <button type="button" class="waves-effect waves-light btn cancel">
+                                <i class="material-icons left" ng-click="errorCallBack()">Cancel</i>
+                            </button>
+                        </div>
+
                     </form>
                 </div>
+            </div>
         </div>
     </div>
 </div>
-
-<script src="/lib/jquery.min.js"></script>
-<script src="/lib/angular/angular.js"></script>
-<script src="/lib/angular/angular-resource.js"></script>
-<script src="/lib/angular/angular-route.min.js"></script>
-<script src="/lib/underscore-1.4.4.min.js"></script>
-<script src="/js/app.js"></script>
-<script src="/js/controllers/profileCtrl.js"></script>
-<script src="/js/filters.js"></script>
-<script src="/lib/bootstrap.min.js"></script>
 
 </body>
 </html>

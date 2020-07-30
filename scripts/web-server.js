@@ -47,6 +47,10 @@ app.get('/profile', function(req, res) {
     res.sendFile(path.resolve('app/templates/profile.html'));
 });
 
+app.get('/my-booking', function(req, res) {
+    res.sendFile(path.resolve('app/templates/mybooking.html'));
+});
+
 require("../app/route/account.route")(app);
 require("../app/route/booking.route")(app);
 require("../app/route/cartype.route")(app);
