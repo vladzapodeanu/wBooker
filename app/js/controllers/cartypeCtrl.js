@@ -7,7 +7,10 @@ exports.findAll = (req, res) => {
     const id_cartype = req.query.id_cartype;
     var condition = id_cartype ? { id_cartype: { [Op.like]: `%${id_cartype}%` } } : null;
 
-    CarType.findAll({ where: condition })
+    CarType.findAll({
+        attributes: { exclude: ["createdAt", "updatedAt"] },
+        where: condition
+    })
         .then(data => {
             res.send(data);
         })

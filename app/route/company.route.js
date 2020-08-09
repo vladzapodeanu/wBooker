@@ -6,7 +6,7 @@ module.exports = app => {
     router.get("/", company.findAll);
 
     // Create a new Tutorial
-    router.post("/", company.create);
+    //router.post("/", company.create);
 
     // Update a Tutorial with id
     router.put("/:id", company.update);

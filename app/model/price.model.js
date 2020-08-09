@@ -7,16 +7,13 @@ module.exports = (sequelize, Sequelize) => {
             primaryKey:true
         },
         id_company: {
-            type: 'INTEGER',
-            foreignKey: 'FK_price_company'
+            type: 'INTEGER'
         },
         id_cartype: {
-            type: 'INTEGER',
-            foreignKey: 'FK_price_cartype'
+            type: 'INTEGER'
         },
         id_user: {
-            type: 'INTEGER',
-            foreignKey: 'FK_price_user'
+            type: 'INTEGER'
         },
         distance_threshold: {
             type: 'INTEGER'
@@ -25,15 +22,18 @@ module.exports = (sequelize, Sequelize) => {
             type: 'INTEGER'
         },
         type: {
-            type: 'STRING'
+            type: 'VARCHAR'
         },
         created_at: {
             type: 'DATE'
         },
         updated_at: {
             type: 'DATE'
-        }
-    });
+        }},
+        {
+            freezeTableName: true
+        });
+
 
     return Price;
 }

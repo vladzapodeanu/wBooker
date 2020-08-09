@@ -2,7 +2,7 @@ module.exports = (sequelize, Sequelize) => {
 
     const Voucher = sequelize.define('voucher', {
         code: {
-            type: 'STRING',
+            type: 'VARCHAR',
             autoIncrement:true,
             primaryKey:true
         },
@@ -10,7 +10,7 @@ module.exports = (sequelize, Sequelize) => {
             type: 'INTEGER'
         },
         type: {
-            type: 'STRING'
+            type: 'VARCHAR'
         },
         from: {
             type: 'DATE'
@@ -20,8 +20,10 @@ module.exports = (sequelize, Sequelize) => {
         },
         enabled: {
             type: 'BIT'
-        }
-    });
+        }},
+        {
+            freezeTableName: true
+        });
 
     return Voucher;
 }

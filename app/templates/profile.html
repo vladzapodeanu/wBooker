@@ -1,14 +1,28 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <base href="/"/>
+    <meta charset="utf-8">
+
+    <script src="/lib/jquery.min.js"></script>
+    <script src="/lib/underscore-1.4.4.min.js"></script>
+    <script src="/lib/bootstrap.min.js"></script>
+    <script src="/lib/angular/angular.js"></script>
+    <script src="/lib/angular/angular-resource.js"></script>
+    <script src="/lib/angular/angular-route.js"></script>
+    <script src="https://rawgithub.com/gsklee/ngStorage/master/ngStorage.js"></script>
+
+    <script src="/js/app.js"></script>
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/css/app.css"/>
+
 </head>
 
 
-<body class="container_app"  ng-app="eventsApp">
-<div class="container" ng-controller="Controller" >
-    <div class="collapse navbar-collapse" id="navbarNav">
+<body class="container_app" ng-app="eventsApp" >
+<div class="container"  ng-controller="MyController">
+    <div class=" navbar-collapse" id="navbarNav">
         <ngb-ul class="navbar-nav ">
             <ngb-li class="nav-item">
                 <a class="nav-link" href="/login" >Login</a>
@@ -24,50 +38,44 @@
             </ngb-li>
         </ngb-ul>
     </div>
+
+
     <div id="signup">
         <div class="signup-screen">
             <div class="space-bot text-center">
-                <div style="display: flex">
+                <div class="text-center">
                     <h1>Profile</h1>
                 </div>
-                <div>
-                    <form class="form-register" method="post" name="register" novalidate>
 
-                        <div class="input-field col s6">
-                            <label for="first-name">First Name</label>
-                            <input id="first-name" type="text" class="validate" required>
-                        </div>
+                <form class="form-group" method="post" name="register" novalidate>
 
-                        <div class="input-field col s6">
-                            <label for="last-name">Last Name</label>
-                            <input id="last-name" type="text" class="validate" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="phone_number">Phone Number</label>
-                            <input type="password" class="form-control" id="phone_number" name="type" ng-model="phone_number" ng-maxlength='10' class="validate" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="email">Email address</label>
-                            <input id="email" type="email" class="form-control" name="type" aria-describedby="emailHelp" class="validate" required>
-                        </div>
-                        <p class="form-group" ng-show="form-register.email.$error.email"></p>
-                        <div class="space-top text-left">
-                            <button ng-disabled="form-register.$invalid" class="waves-effect waves-light btn done">
-                                <i class="material-icons left" ng-click="update()" >Edit</i>
-                            </button>
-                            <button type="button" class="waves-effect waves-light btn cancel">
-                                <i class="material-icons left" ng-click="errorCallBack()">Cancel</i>
-                            </button>
-                        </div>
-
-                    </form>
+                <div class="form-group">
+                    <br><label for="nume">Nume</label></br>
+                    <input id="nume" type="text" class="validate" name="nume" required>
                 </div>
-            </div>
+
+                <div class="form-group">
+                <br><label for="password">Password</label></br>
+                    <input type="password" class="validate" id="password" name="password" ng-model="password.text" ng-minlength='10'  required>
+                </div>
+
+
+                <div class="form-group">
+                    <br><label for="email">Email address</label></br>
+                    <input id="email" type="email" class="validate" name="email" ng-model="email.text"  required>
+                </div>
+
+                <div class="space-top text-left">
+                    <button ng-disabled="form-register.$invalid" class="waves-effect waves-light btn done">
+                        <i class="text-center" ng-click="update()" >Edit</i>
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
+
+
 
 </body>
 </html>

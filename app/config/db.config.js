@@ -1,10 +1,13 @@
 module.exports = {
-    database: 'insoftdev',
+    database: 'webbooker',
     username: 'root',
-    password: 'efecon',
+    password: 'root',
     host: 'localhost',
-    port: '1234',
+    port: 3306,
     dialect: 'mysql',
+    dialectOptions: {
+        timezone: 'Etc/GMT0',
+    },
     pool: {
         max: 5,
         min: 0,
@@ -12,3 +15,4 @@ module.exports = {
         idle: 10000
     }
 };
+// mysql -u insoftdev_root -p insoftdev -h db4free.net -P 3306 -D insoftdev

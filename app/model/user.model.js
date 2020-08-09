@@ -7,35 +7,33 @@ module.exports = (sequelize, Sequelize) => {
             primaryKey: true
         },
         id_company: {
-            type: 'INTEGER',
-            foreignKey: 'FK_user_company'
+            type: 'INTEGER'
         },
         user_type: {
-            type: 'STRING',
+            type: 'VARCHAR',
             allowNull: false
         },
         role: {
-            type: 'STRING',
+            type: 'VARCHAR',
             allowNull: false
         },
         password: {
-            type: 'STRING',
+            type: 'VARCHAR',
             allowNull: false
         },
-        type_: {
-            type: 'STRING',
+        type: {
+            type: 'VARCHAR',
             allowNull: false
         },
         id_account: {
-            type: 'INTEGER',
-            foreignKey: 'FK_user_account'
+            type: 'INTEGER'
         },
         name: {
-            type: 'STRING',
+            type: 'VARCHAR',
             allowNull: false
         },
-        address: {
-            type: 'STRING',
+        adress: {
+            type: 'VARCHAR',
             allowNull: false
         },
         email: {
@@ -43,19 +41,17 @@ module.exports = (sequelize, Sequelize) => {
             allowNull: false
         },
         phone_number: {
-            type: 'STRING',
-            validate: {
-                min: 10,
-                max: 11
-            }
+            type: 'VARCHAR',
         },
         created_at: {
             type: 'DATE'
         },
         updated_at: {
             type: 'DATE'
-        }
-    });
+        }},
+        {
+            freezeTableName: true
+        });
 
     return User;
 }

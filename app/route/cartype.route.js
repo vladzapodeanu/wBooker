@@ -6,7 +6,7 @@ module.exports = app => {
     router.get("/", cartype.findAll);
 
     // Create a new Tutorial
-    router.post("/", cartype.create);
+   // router.post("/", cartype.create);
 
     // Update a Tutorial with id
     router.put("/:id", cartype.update);

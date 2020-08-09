@@ -7,7 +7,10 @@ exports.findAll = (req, res) => {
     const id_account = req.query.id_account;
     var condition = id_account ? { id_account: { [Op.like]: `%${id_account}%` } } : null;
 
-    Account.findAll({ where: condition })
+    Account.findAll({
+        attributes: { exclude: ["createdAt", "updatedAt"] },
+        where: condition
+    })
         .then(data => {
             res.send(data);
         })

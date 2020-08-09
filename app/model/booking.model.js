@@ -7,12 +7,10 @@ module.exports = (sequelize, Sequelize) => {
             primaryKey: true
         },
         id_company: {
-            type: 'INTEGER',
-            foreignKey: 'FK_booking_company'
+            type: 'INTEGER'
         },
         id_user: {
-            type: 'INTEGER',
-            foreignKey: 'FK_booking_user'
+            type: 'INTEGER'
         },
         id_driver: {
             type: 'INTEGER'
@@ -20,11 +18,11 @@ module.exports = (sequelize, Sequelize) => {
         id_cartype: {
             type: 'INTEGER'
         },
-        from_address: {
-            type: 'STRING'
+        from_adress: {
+            type: 'VARCHAR'
         },
-        to_address: {
-            type: 'STRING'
+        to_adress: {
+            type: 'VARCHAR'
         },
         distance: {
             type: 'DOUBLE'
@@ -36,7 +34,7 @@ module.exports = (sequelize, Sequelize) => {
             type: 'INTEGER'
         },
         payment_method: {
-            type: 'STRING'
+            type: 'VARCHAR'
         },
         created_at: {
             type: 'TIME'
@@ -45,21 +43,23 @@ module.exports = (sequelize, Sequelize) => {
             type: 'TIME'
         },
         status: {
-            type: 'STRING'
+            type: 'VARCHAR'
         },
         driver_on_the_way: {
-            type: 'STRING'
+            type: 'VARCHAR'
         },
         driver_at_pickup: {
-            type: 'STRING'
+            type: 'VARCHAR'
         },
-        passenger_on_bord: {
-            type: 'INTEGER'
-        },
+        // passenger_on_bord: {
+        //     type: 'INTEGER'
+        // },
         done: {
             type: 'BIT'
-        }
-    });
+        }},
+        {
+            freezeTableName: true
+        });
 
     return Booking;
 }

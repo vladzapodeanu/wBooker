@@ -6,7 +6,7 @@ module.exports = app => {
     router.get("/", driverstatus.findAll);
 
     // Create a new Tutorial
-    router.post("/", driverstatus.create);
+   // router.post("/", driverstatus.create);
 
     // Update a Tutorial with id
     router.put("/:id", driverstatus.update);

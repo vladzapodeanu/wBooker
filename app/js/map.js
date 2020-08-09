@@ -1,112 +1,99 @@
-function initMap() {
-    let map = new google.maps.Map(document.getElementById('map'), {
-        mapTypeControl: false,
-        center: {
-            lat: 46.2167,
-            lng: 24.8
-        },
-        zoom: 6
-    });
+var orig_input, dest_input, orig_lat, orig_long, dest_lat, dest_long, total = 0;
 
-    new AutocompleteLocation(map);
+function initAutocomplete() {
+    orig_input = new google.maps.places.Autocomplete(
+        document.getElementById('from-address'), {types: ['geocode']});
+
+    dest_input = new google.maps.places.Autocomplete(
+        document.getElementById('to-address'), {types: ['geocode']});
+
+    orig_input.setFields(['address_component', 'geometry']);
+    dest_input.setFields(['address_component', 'geometry']);
+
+    orig_input.addListener('place_changed', fillInAddressPickUp);
+    dest_input.addListener('place_changed', fillInAddressDestination);
+
+    initMap();
+
 }
 
-function AutocompleteLocation(map) {
-    this.map = map;
-    this.originPlaceId = null;
-    this.destinationPlaceId = null;
-    this.travelMode = 'DRIVING';
-    let originInput = document.getElementById('origin-input');
-    let destinationInput = document.getElementById('destination-input');
-    let modeSelector = document.getElementById('mode-selector');
-    this.directionsService = new google.maps.DirectionsService;
-    this.directionsDisplay = new google.maps.DirectionsRenderer;
-    this.directionsDisplay.setMap(map);
+function fillInAddressPickUp() {
 
-    let originAutocomplete = new google.maps.places.Autocomplete(
-        originInput /*, {placeIdOnly: true} */ );
-    let destinationAutocomplete = new google.maps.places.Autocomplete(
-        destinationInput /*, {placeIdOnly: true} */ );
+    var place = orig_input.getPlace();
 
-    this.setupClickListener('changemode-driving', 'DRIVING');
-
-    this.setupPlaceChangedListener(originAutocomplete, 'ORIG');
-    this.setupPlaceChangedListener(destinationAutocomplete, 'DEST');
-
-    this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(originInput);
-    this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(destinationInput);
-    this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(modeSelector);
-}
-
-// Sets a listener on a radio button to change the filter type on Places
-// Autocomplete.
-AutocompleteLocation.prototype.setupClickListener = function (id, mode) {
-    let radioButton = document.getElementById(id);
-    let me = this;
-    radioButton.addEventListener('click', function () {
-        me.travelMode = mode;
-        me.route();
-    });
-};
-
-AutocompleteLocation.prototype.setupPlaceChangedListener = function (autocomplete, mode) {
-    let me = this;
-    autocomplete.bindTo('bounds', this.map);
-    autocomplete.addListener('place_changed', function () {
-        let place = autocomplete.getPlace();
-        if (!place.place_id) {
-            window.alert("Please select an option from the dropdown list.");
-            return;
-        }
-        if (mode === 'ORIG') {
-            me.originPlaceId = place.place_id;
-            document.getElementById("orig_latitude").value = place.geometry.location.lat();
-            document.getElementById("orig_longitude").value = place.geometry.location.lng();
-        } else {
-            me.destinationPlaceId = place.place_id;
-            document.getElementById("dest_latitude").value = place.geometry.location.lat();
-            document.getElementById("dest_longitude").value = place.geometry.location.lng();
-        }
-        me.route();
-    });
-
-};
-
-AutocompleteLocation.prototype.route = function () {
-    if (!this.originPlaceId || !this.destinationPlaceId) {
-        return;
+    if (place == null) {
+        console.log("Adresa pickup null");
+    } else {
+        orig_lat = place.geometry.location.lat();
+        orig_long = place.geometry.location.lng();
     }
-    let me = this;
+}
 
-    this.directionsService.route({
-        origin: {
-            'placeId': this.originPlaceId
-        },
-        destination: {
-            'placeId': this.destinationPlaceId
-        },
-        travelMode: this.travelMode
-    }, function (response, status) {
-        if (status === 'OK') {
-            me.directionsDisplay.setDirections(response);
-            let directionsData = response.routes[0].legs[0];
-            let distance = document.getElementById("distance");
-            let estimation = document.getElementById("estimation");
-            let pret_1 = document.getElementById("pret_1");
-            let pret_2 = document.getElementById("pret_2");
-            let pret_3 = document.getElementById("pret_3");
+function fillInAddressDestination() {
 
+    var place = dest_input.getPlace();
 
-            distance.innerHTML = `Distanta dintre  ${directionsData.from_address} si ${directionsData.to_address} este de ${directionsData.distance.text}`;
-            estimation.innerHTML = `Timp estimativ: ${directionsData.duration.text}`
-            let pretInLei = directionsData.distance.value / 1000 * 1; //1 lei/km
-            pret_1.innerHTML = `Pretul cursei pentru masina 1 de masina este de  ${pretInLei} lei.`;
-            let pretInLei_2 = directionsData.distance.value / 1000 * 2; //2 lei/km
-            pret_2.innerHTML = `Pretul cursei pentru masina 2 de masina este de  ${pretInLei_2} lei.`;
-            let pretInLei_3 = directionsData.distance.value / 1000 * 3; //3 lei/km
-            pret_3.innerHTML = `Pretul cursei pentru masina 3 de masina este de  ${pretInLei_3} lei.`;
-        } else {
-            window.alert('Directions request failed due to ' + status);
-        }
+    if (place == null) {
+        console.log("Adresa destinatie null");
+    } else {
+        dest_lat = place.geometry.location.lat();
+        dest_long = place.geometry.location.lng();
+    }
+}
+
+function initMap() {
+    var directionsService = new google.maps.DirectionsService();
+    var directionsRenderer = new google.maps.DirectionsRenderer();
+    var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 6,
+        center: {lat: 45.943161, lng: 24.96676}
     });
-};
+    directionsRenderer.setMap(map);
+
+    var onChangeHandler = function () {
+        calculateAndDisplayRoute(directionsService, directionsRenderer);
+    };
+
+    document.getElementById('to-address').addEventListener("change", () =>
+        setTimeout(onChangeHandler, 300));
+
+}
+
+function calculateAndDisplayRoute(directionsService, directionsRenderer) {
+    directionsService.route(
+        {
+            origin: new google.maps.LatLng(orig_lat, orig_long),
+            destination: new google.maps.LatLng(dest_lat, dest_long),
+            travelMode: 'DRIVING',
+            drivingOptions: {
+                departureTime: new Date(Date.now()),
+                trafficModel: 'optimistic'
+            }
+        },
+        function (response, status) {
+            if (status === 'ZERO_RESULTS') {
+                window.alert('Nici o rută nu a putut fi găsită între origine și destinație pentru Masina');
+            } else if (status === 'OK') {
+                directionsRenderer.setDirections(response);
+                computeTotalDistance(directionsRenderer.getDirections());
+            } else {
+                window.alert('Directions request failed due to ' + status);
+            }
+        });
+}
+
+function computeTotalDistance(result) {
+    var myroute = result.routes[0];
+    for (var i = 0; i < myroute.legs.length; i++) {
+        total += myroute.legs[i].distance.value;
+    }
+    total = total / 1000;
+
+    document.getElementById('distance').innerHTML = "Distanta: " + total + "km";
+    document.getElementById('duration').innerHTML = "Timp estimativ: " + myroute.legs[0].duration.text;
+    document.getElementById("orig_latitude").innerHTML = "Latitudine Origine: " + orig_lat;
+    document.getElementById("orig_longitude").innerHTML = "Longitudine Origine: " + orig_long;
+    document.getElementById("dest_latitude").innerHTML = "Latitudine Destinatie: " + dest_lat;
+    document.getElementById("dest_longitude").innerHTML = "Longitudine Destinatie: " + dest_long;
+    document.getElementById("pret").innerHTML = "Pret: " + total + "Lei";
+}

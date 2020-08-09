@@ -7,11 +7,10 @@ module.exports = (sequelize, Sequelize) => {
             primaryKey:true
         },
         id_company: {
-            type: 'INTEGER',
-            foreignKey: 'FK_cartype_company'
+            type: 'INTEGER'
         },
         type: {
-            type: 'STRING'
+            type: 'VARCHAR'
         },
         picture: {
             type: 'BLOB'
@@ -27,8 +26,10 @@ module.exports = (sequelize, Sequelize) => {
         },
         updated_at: {
             type: 'DATE'
-        }
-    });
+        }},
+        {
+            freezeTableName: true
+        });
 
     return CarType;
 }

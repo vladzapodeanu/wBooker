@@ -1,12 +1,26 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" ng-app="eventsApp">
 <head>
-    <base href="/"/>
-    <link rel="stylesheet" href="/css/app.css"/>
+    <meta charset="utf-8">
 
+    <script src="/lib/jquery.min.js"></script>
+    <script src="/lib/underscore-1.4.4.min.js"></script>
+    <script src="/lib/bootstrap.min.js"></script>
+    <script src="/lib/angular/angular.js"></script>
+    <script src="/lib/angular/angular-resource.js"></script>
+    <script src="/lib/angular/angular-route.js"></script>
+    <script src="https://rawgithub.com/gsklee/ngStorage/master/ngStorage.js"></script>
+
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="/css/app.css"/></link>
+    <script src="/js/app.js"></script>
+    <script type="text/javascript" src="js/map.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDkiGv2h1IOQCgr2R-S48Gb8jjbxg55v8w&libraries=places&callback=initAutocomplete"
+         callback   async defer></script>
+<!--    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDkiGv2h1IOQCgr2R-S48Gb8jjbxg55v8w&libraries=places,geometry&callback=initMap" async defer></script>-->
 </head>
-<body class="container_app" ng-app="eventsApp" >
-<div class="container" ng-controller="Controller" >
+<body  ng-app="eventsApp" >
+<div class="container_booking" ng-controller="MyController"  >
     <div class=" navbar-collapse" id="navbarNav">
         <ngb-ul class="navbar-nav ">
             <ngb-li class="nav-item">
@@ -23,93 +37,112 @@
             </ngb-li>
         </ngb-ul>
     </div>
-    <div id="signup">
-        <div class="signup-screen">
-            <div class="space-bot text-center">
-                <div style="display: flex">
-                    <h1>Booking</h1>
-                </div>
-                <div class="divider"></div>
+           <div class="space-bot text-center">
+            <div class="text-center">
+                <h1>Booking</h1>
             </div>
-            <form class="form-booking" method="post" name="register" novalidate>
+            <div class="divider"></div>
+        </div>
 
-                <div class="input">
-                    <label for="first-name">First Name</label>
-                    <input id="first-name" type="text" class="validate" required>
-                </div>
+        <form class="input_booking" method="post" name="register" novalidate>
+        <div class="command">
 
-                <div class="input">
-                    <label for="last-name">Last Name</label>
-                    <input id="last-name" type="text" class="validate" required>
-                </div>
+            <div class="input">
+                <br><label for="name">Name</label></br>
+                <input id="name" type="text" class="validate" required>
+            </div>
 
-                <div class="input">
-                    <label for="phone_number">Phone Number</label>
-                    <input type="password" class="form-control" id="phone_number" name="type" ng-model="phone_number" ng-maxlength='10' class="validate" required>
-                </div>
+            <div class="input">
+                <br><label for="phone_number">Phone Number</label></br>
+                <input type="phone_number" class="form-control" id="phone_number" name="type" ng-model="phone_number.text" ng-pattern="phone_number.pattern"  >
+            </div>
 
-                <div class="input">
-                    <label for="email">Email address</label>
-                    <input id="email" type="email" class="form-control" name="type" aria-describedby="emailHelp" class="validate" ng-show="form-register.email.$error.email" required>
-                </div>
-                <div class="input">
-                    <label for="from-address">From address</label>
-                    <input id="from-address" type="text" class="validate" required>
-                </div>
+            <div class="input">
+                <br><label for="email">Email address</label></br>
+                <input id="email" type="email" class="form-control" name="type"  ng-model="email.text" >
+            </div>
 
-                <div class="input">
-                    <label for="to-address">To address</label>
-                    <input id="to-address" type="text" class="validate" required>
-                </div>
-
-                <div class="form-group form-check">
-                    <div style="display: flex">
-                        <input type="radio" name="cartype" id="car-type-1" checked="checked" class="validate" required>
-                        <label for="car-type-1">Price for Car Type 1</label>
+            <div class="input">
+                <label for="passenger"><p>Numar pasageri</p></label>
+                    <div class="select-container">
+                        <select  id="passenger" name="passenger" ng-model="passenger" type="text">
+                            <option value="1" >1</option>
+                            <option value="2">2</option>
+                            <option value="3" >3</option>
+                            <option value="4">4</option>
+                            <option value="5" >5</option>
+                            <option value="6">6</option>
+                        </select>
                     </div>
-                    <input id="price-car-type-1" type="text" class="validate" required disabled>
-                    <br>
-                    <div style="display: flex">
-                        <input type="radio" name="cartype" id="car-type-2" class="validate" required>
-                        <label for="car-type-2">Price for Car Type 1</label>
+            </div>
+            <div class="input" >
+               <label for="car"><p>Tip masina</p></label>
+                 <div class="select-container">
+                       <select  id="car" name="car" ng-model="cartype" type="text">
+                           <option value="car_1" >Masina tip 1</option>
+                           <option value="car_2">Masina tip 2</option>
+                      </select>
                     </div>
-                    <input id="price-car-type-2" type="text" class="validate" required disabled>
-                </div>
-                <br>Payment method</br>
-                <div class="form-group form-check">
-                    <div style="display: flex">
-                        <input type="radio" name="payment" id="changemode-card"  checked="checked" class="validate" required>
-                        <label for="changemode-card"> Card</label>
-                    </div>
-                    <div style="display: flex">
-                        <input type="radio" name="payment" id="changemode-cash" class="validate" required>
-                        <label for="changemode-cash"> Cash</label>
-                    </div>
-                    <div style="display: flex">
-                        <input type="radio" name="payment" id="changemode-transfer" class="validate" required>
-                        <label for="changemode-transfer"> Bank transfer</label>
-                    </div>
-                </div>
+               <button ng-disabled="form-register.$invalid" class="waves-effect waves-light btn done">
+                    <i class="material-icons left"  ng-click="checkcars()" >Check</i>
+                </button>
+            </div>
 
 
-                <div class="space-top text-left">
-                    <button ng-disabled="form-register.$invalid" class="waves-effect waves-light btn done">
-                        <i class="material-icons left" ng-click="initMyProfile()" >Done</i>
-                    </button>
-                    <button type="button" class="waves-effect waves-light btn cancel">
-                        <i class="material-icons left" >Cancel</i>
-                    </button>
-                </div>
-            </form>
+            <div class="input">
+                <br><label for="from-address">From address</label></br>
+                <input id="from-address" type="text" class="validate" required>
+            </div>
+
+            <div class="input">
+                <br><label for="to-address">To address</label></br>
+                <input id="to-address" type="text" class="validate" required>
+            </div>
+
+            <button ng-disabled="form-register.$invalid" class="input">
+                <i class="material-icons left" ng-click="pret()" >Calculate</i>
+            </button>
+        </div>
+            <p id="orig_latitude"></p>
+            <p id="orig_longitude"></p>
+            <p id="dest_latitude"></p>
+            <p id="dest_longitude"></p>
 
             <p id="distance"></p>
-            <p id="estimation"></p>
-            <div id="map"></div>
+            <p id="duration"></p>
+            <p id="pret"></p>
+            <p id="pret_2"></p>
+
+            <div class="input">
+                <br>Payment method</br>
+                <div class="text-center">
+                    <input type="radio" name="payment" id="changemode-card"  checked="checked" class="validate" required>
+                    <label for="changemode-card"> Card</label>
+                </div>
+                <div class="text-center">
+                    <input type="radio" name="payment" id="changemode-cash" class="validate" required>
+                    <label for="changemode-cash"> Cash</label>
+                </div>
+                <div class="text-center">
+                    <input type="radio" name="payment" id="changemode-transfer" class="validate" required>
+                    <label for="changemode-transfer"> Bank</label>
+                </div>
+            </div>
+
+            <div class="space-top text-left">
+                <button ng-disabled="form-register.$invalid" class="waves-effect waves-light btn done">
+                    <i class="material-icons left" ng-click="purcase()" >Done</i>
+                </button>
+            </div >
 
 
-        </div>
+        </form>
+    <div class="map" id="map"></div>
+
+
     </div>
 </div>
+
 
 </body>
 </html>

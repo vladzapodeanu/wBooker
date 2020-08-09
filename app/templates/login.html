@@ -3,57 +3,45 @@
 <head>
 
     <meta charset="utf-8">
+
+    <script src="/lib/jquery.min.js"></script>
+    <script src="/lib/underscore-1.4.4.min.js"></script>
+    <script src="/lib/bootstrap.min.js"></script>
+    <script src="/lib/angular/angular.js"></script>
+    <script src="/lib/angular/angular-resource.js"></script>
+    <script src="/lib/angular/angular-route.js"></script>
+    <script src="https://rawgithub.com/gsklee/ngStorage/master/ngStorage.js"></script>
+
+    <script src="/js/app.js"></script>
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/css/app.css"/>
 
 
 </head>
 
 <body class="container_app" ng-app="eventsApp">
-<div class="container" ng-controller="Controller" >
-    <div class="collapse navbar-collapse" id="navbarNav">
-        <ngb-ul class="navbar-nav ">
-            <ngb-li class="nav-item">
-                <a class="nav-link" href="/login" >Login</a>
-            </ngb-li>
-            <ngb-li class="nav-item">
-                <a class="nav-link" href="/profile" >My Profile</a>
-            </ngb-li>
-            <ngb-li class="nav-item">
-                <a class="nav-link" href="/booking" >Booking</a>
-            </ngb-li>
-            <ngb-li class="nav-item">
-                <a class="nav-link" href="/my-booking" >My Booking</a>
-            </ngb-li>
-        </ngb-ul>
-    </div>
+<div class="container" ng-controller="MyController" >
 
-    <div class="text-center">
-        <title>Login</title>
-        <div style="display: flex">
-            <h1>Login</h1>
-        </div>
-    </div>
-   <form class="input" method="post" name="login" novalidate>
+        <h1>Login</h1>
         <div class="form-group">
-            <label for="email">Email address</label>
-            <input id="email" type="email" class="form-control" name="type" aria-describedby="emailHelp" ng-show="form-register.email.$error.email" class="validate" required>
+            <br><label for="email">Email address</label></br>
+            <input id="email" type="email" class="form-control" name="type" ng-model="email.text" required>
         </div>
 
         <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" class="form-control" id="password" name="type" ng-model="password" ng-minlength='6' ng-show="form-register.password.$error.minlength || form.password.$invalid" class="validate" required>
+            <br><label for="password">Password</label></br>
+            <input type="password" class="form-control" id="password" name="type" ng-model="password.text" ng-minlength='5'  required>
         </div>
 
 
        <div class="space-top text-left">
            <button ng-disabled="form-register.$invalid" class="waves-effect waves-light btn done">
-               <i class="material-icons left" ng-click="initMyProfile()" >Connect</i>
-           </button>
-           <button type="button" class="waves-effect waves-light btn cancel">
-               <i class="material-icons left" ng-click="errorCallBack()">Cancel</i>
+               <i class="material-icons left" ng-click="connect()"  >Connect</i>
            </button>
        </div>
-    </form>
+
 
 </div>
 

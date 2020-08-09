@@ -7,7 +7,10 @@ exports.findAll = (req, res) => {
     const id_log = req.query.id_log;
     var condition = id_log ? { id_log: { [Op.like]: `%${id_log}%` } } : null;
 
-    Log.findAll({ where: condition })
+    Log.findAll({
+        attributes: { exclude: ["createdAt", "updatedAt"] },
+        where: condition
+    })
         .then(data => {
             res.send(data);
         })

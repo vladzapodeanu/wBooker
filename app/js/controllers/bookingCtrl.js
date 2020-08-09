@@ -7,7 +7,10 @@ exports.findAll = (req, res) => {
     const id_booking = req.query.id_booking;
     var condition = id_booking ? { id_booking: { [Op.like]: `%${id_booking}%` } } : null;
 
-    Booking.findAll({ where: condition })
+    Booking.findAll({
+        attributes: { exclude: ["createdAt", "updatedAt"] },
+        where: condition
+    })
         .then(data => {
             res.send(data);
         })
@@ -18,7 +21,7 @@ exports.findAll = (req, res) => {
             });
         });
 };
-// Create and Save a new Tutorial
+//Create and Save a new Tutorial
 exports.create = (req, res) => {
     // Validate request
     if (!req.body.id_booking) {

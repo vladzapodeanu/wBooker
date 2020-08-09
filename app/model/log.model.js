@@ -10,10 +10,12 @@ module.exports = (sequelize, Sequelize) => {
             type: 'INTEGER'
         },
 
-        values: {
-            type: 'INTEGER'
-        }
-    });
+        value: {
+            type: 'BIT'
+        }},
+        {
+            freezeTableName: true
+        });
 
     return Log;
 }

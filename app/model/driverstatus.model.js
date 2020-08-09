@@ -1,24 +1,29 @@
 module.exports = (sequelize, Sequelize) => {
 
     const DriverStatus = sequelize.define('driverstatus', {
-        id_user: {
+        id_driver: {
             type: 'INTEGER',
             autoIncrement:true,
             primaryKey:true
+        },
+        id_user:{
+          type: 'INTEGER'
         },
         online: {
             type: 'BIT'
         },
         status: {
-            type: 'STRING'
+            type: 'VARCHAR'
         },
         lat: {
             type: 'FLOAT'
         },
         longit: {
             type: 'FLOAT'
-        }
-    });
+        }},
+        {
+            freezeTableName: true
+        });
 
     return DriverStatus;
 }

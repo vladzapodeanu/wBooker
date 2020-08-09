@@ -7,16 +7,18 @@ module.exports = (sequelize, Sequelize) => {
             primaryKey:true
         },
         id_company: {
-            type: 'INTEGER',
-            foreignKey:'FK_account_company'
+            type: 'INTEGER'
         },
         name: {
-            type: 'STRING'
+            type: 'VARCHAR'
         },
         type: {
-            type: 'STRING'
-        }
-    });
+            type: 'VARCHAR'
+        }},
+        {
+            freezeTableName: true
+        });
+
 
     return Account;
 }

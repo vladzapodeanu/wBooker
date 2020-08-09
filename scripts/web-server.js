@@ -16,20 +16,30 @@ app.use(bodyParser.json());
 
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, '../app')));
 
-const db = require("../app/model");
+const db = require("../app/model/index.js");
 
 db.sequelize.sync();
-// // drop the table if it already exists
- db.sequelize.sync({ force: true }).then(() => {
-  console.log("Drop and re-sync db.");
-});
 
-// simple route
-/*app.get("/", (req, res) => {
-    res.json({ message: "Welcome to booker application." });
-});*/
-app.use(express.static(path.join(__dirname, '../app')));
+// drop the table if it already exists
+//  db.sequelize.sync({ force: true })
+//      .then(() => {
+//         console.log("Drop and re-sync db.");
+//       })
+//      .catch(error => {
+//          console.log(error);
+//      });
+
+//simple route
+// app.get("/", (req, res) => {
+//     res.json({ message: "Welcome to booker application." });
+// });
+
+var http = require('http').createServer(app);
+
+var serverAddress = 'https://notify.insoftd.com:9910';
+var companyID = 248
 
 app.get('/', function(req, res) {
     res.sendFile(path.resolve('app/index.html'));
@@ -80,7 +90,6 @@ const events = require('./eventsController');
 const app = express();
 const rootPath = path.normalize(__dirname + '/../');
 const mariadb=require('mariadb');
-
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());

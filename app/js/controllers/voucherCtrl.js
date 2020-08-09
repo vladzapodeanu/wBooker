@@ -7,7 +7,10 @@ exports.findAll = (req, res) => {
     const code = req.query.code;
     var condition = code ? { code: { [Op.like]: `%${code}%` } } : null;
 
-    Voucher.findAll({ where: condition })
+    Voucher.findAll({
+        attributes: { exclude: ["createdAt", "updatedAt"] },
+        where: condition
+    })
         .then(data => {
             res.send(data);
         })

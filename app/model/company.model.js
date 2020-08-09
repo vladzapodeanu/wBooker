@@ -7,9 +7,12 @@ module.exports = (sequelize, Sequelize) => {
             primaryKey:true
         },
         name: {
-            type: 'STRING'
-        }
-    });
+            type: 'VARCHAR'
+        }},
+        {
+            freezeTableName: true
+        });
+
 
     return Company;
 }

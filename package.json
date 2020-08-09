@@ -14,6 +14,7 @@
   "license": "ISC",
   "dependencies": {
     "@ng-bootstrap/ng-bootstrap": "^7.0.0",
+    "angular": "^1.8.0",
     "body-parser": "^1.19.0",
     "bootstrap": "^4.0.0-alpha.6",
     "cors": "^2.8.5",
@@ -23,8 +24,10 @@
     "mariadb": "^2.4.1",
     "mysql": "^2.18.1",
     "mysql2": "^2.1.0",
+    "ngstorage": "^0.3.11",
     "nodemon": "^2.0.4",
     "patch": "0.0.1",
+    "require": "^2.4.20",
     "sequelize": "^6.3.3",
     "sync": "^0.2.5"
   }

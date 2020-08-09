@@ -6,7 +6,7 @@ module.exports = app => {
     router.get("/", booking.findAll);
 
     // Create a new Tutorial
-    router.post("/", booking.create);
+   router.post("/", booking.create);
 
     // Update a Tutorial with id
     router.put("/:id", booking.update);
