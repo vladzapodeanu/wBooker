@@ -89,13 +89,13 @@ function computeTotalDistance(result) {
     for (var i = 0; i < myroute.legs.length; i++) {
         total += myroute.legs[i].distance.value;
     }
-    total = total / 1000;
+   // total = total / 1000;
 
-    document.getElementById('distance').innerHTML = "Distanta: " + total + "km";
-    document.getElementById('duration').innerHTML = "Timp estimativ: " + myroute.legs[0].duration.text;
+    // document.getElementById('distance').innerHTML = "Distanta: " + total + "km";
+    // document.getElementById('duration').innerHTML = "Timp estimativ: " + myroute.legs[0].duration.text;
     document.getElementById("orig_latitude").innerHTML = "Latitudine Origine: " + orig_lat;
     document.getElementById("orig_longitude").innerHTML = "Longitudine Origine: " + orig_long;
     document.getElementById("dest_latitude").innerHTML = "Latitudine Destinatie: " + dest_lat;
     document.getElementById("dest_longitude").innerHTML = "Longitudine Destinatie: " + dest_long;
-    document.getElementById("price").innerHTML = "Pret: " + total + "Lei";
+    // document.getElementById("price").innerHTML = "Pret: " + total + "Lei";
 }

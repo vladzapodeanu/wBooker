@@ -74,12 +74,12 @@ $scope.checkcars =function () {
     });
 }
 
-$scope.booking = function(){
+$scope.mybooking = function(){
     $http({
         method: 'GET',
-        url: '/api/booking/' + $sessionStorage.id_booking
+        url: '/api/booking/' + $sessionStorage.valueId
     }).then(function (data){
-        $scope.bookings=data.data.records;
+        $scope.bookings=data.data;
     });
 }
 
@@ -88,7 +88,8 @@ $scope.initMyProfile = function () {
 
     $http({
         method: 'GET',
-        url: '/api/user/' + user_id
+        url: '/api/user/' + user_id,
+
     }).then(function successCallback(response) {
 
         $scope.name = response.data[0].name;
@@ -104,23 +105,25 @@ $scope.initMyProfile = function () {
 $scope.update = function(){
 
     var email = $sessionStorage.valueToShare;
-
+    var user_id = $sessionStorage.valueId;
     $http({
         method: 'PUT',
-        url: '/api/user/',
+        url: '/api/user/' ,
         data: {
-             'password': $scope.password,
+
             'name': $scope.name,
-            'email': $scope.email
+            'email': $scope.email.text,
+            'password': $scope.password
+
         }
     }).then(function successCallback(response) {
-        $sessionStorage.valueToShare = $scope.email;
+        $sessionStorage.valueToShare = $scope.email.text;
         console.log($sessionStorage.valueToShare);
         email = $sessionStorage.valueToShare;
 
         $scope.initMyProfile();
     }, function errorCallback(response) {
-        console.log("error");
+        console.log("errorupdate");
     });
 }
 $scope.createBooking = function () {
@@ -184,7 +187,15 @@ $scope.pret =function () {
         }
 
     }).then(function (data) {
+        $scope.route = data.data.records;
 
+        for (var i in $scope.route) {
+            $scope.dista = "Distanta: " + $scope.route[i].details.distance/1000 + " km.";
+            $scope.durata = "Timp calatorie: " + $scope.route[i].details.duration / 60 + " minute.";
+
+            $sessionStorage.distance = $scope.route[i].details.distance;
+            $sessionStorage.duration = $scope.route[i].details.duration;
+        }
     $http({
             method: 'POST',
             url: 'https://api-test.insoftd.com/v1/operator/price',
@@ -225,8 +236,8 @@ $scope.pret =function () {
                             "infant_seats_number": 0,
                             "child_seats_number": 0,
                             "booster_seats_number": 0,
-                            "id_client": null,
-                            "pickup_time": "2020-08-30 11:42:00",
+                            "id_client": 4,
+                            "pickup_time": "2020-08-29 11:42:00",
                             "passengers_number": 1,
                             "payment_method": "cash",
                             "waiting_time": 0,
@@ -237,102 +248,100 @@ $scope.pret =function () {
             }
         }).then(function (data) {
 
-        alert(data.data.records[0].result);
+
+        $scope.pric = "Pret: " + data.data.records.total_price + " $.";
+        $sessionStorage.price = data.data.records.total_price;
 
         });
     });
     }
 
-$scope.purcase = function () {
+    $scope.purcase = function () {
 
-    $http({
-        method: 'POST',
-        url: 'https://api-test.insoftd.com/v1/operator/booking',
-        headers: {'Authorization': 'Basic aW50ZXJuc2hpcEBpbnNvZnRkZXYuY29tOmJhY2tvZmZpY2VAfEAyNDg='},
-        data:{
-            "BookingList": [{
-                "Booking": {
-                    "id_car_type": "1",
-                    "id_client": "1",
-                    "order_number": "",
-                    "id_driver_to_car": null,
-                    "passenger_name": $sessionStorage.name,
-                    "passenger_email": $sessionStorage.email,
-                    "passenger_mobile": $sessionStorage.phone_number,
-                    "payment_method": "cash",
-                    "status": "Unallocated",
-                    "source": "backoffice",
-                    "infant_seats_number": 0,
-                    "child_seats_number": 0,
-                    "booster_seats_number": 0,
-                    "passengers_number": $scope.passenger,
-                    "pickup_address": "teest2",
-                    "dropoff_address": "bbdfg",
-                    "pickup_time": "2020-8-30 12:11:00",
-                    "pickup_lat": orig_lat,
-                    "pickup_lng": orig_long,
-                    "dropoff_lat": dest_lat,
-                    "dropoff_lng": dest_long,
-                    "duration": $sessionStorage.duration,
-                    "journey_distance": $sessionStorage.distance,
-                    "waiting_time": 0,
-                    "journey_type": "asap",
-                    "booking_type": 1,
-                    "cancel_reason": null,
-                    "id_pickup_zone": "791",
-                    "id_dropoff_zone": "791",
-                    "pickup_details": "t 2",
-                    "dropoff_details": "fvsfvvf"
-                },
-                "BookingCharge": {
-                    "extra_card_payment": 0,
-                    "base_journey_charge": 17.01,
-                    "driver_base_journey_charge": 0,
-                    "extra_baby_seat": 0,
-                    "extra_stow": 5,
-                    "duration_charge": 0,
-                    "extra_waiting_time": 0,
-                    "extra_car_type": 0,
-                    "exception": 0,
-                    "time_frame": 17.01,
-                    "cash": $sessionStorage.price,
-                    "credit": 0,
-                    "commission": 0,
-                    "discount": 0,
-                    "driver_tip": 0,
-                    "total_journey": $sessionStorage.price,
-                    "driver_total_journey": 0,
-                    "zone_extra_charge": 0,
-                    "voucher_discount": 0,
-                    "administration_fee": 5,
-                    "vat": 22.01,
-                    "driver_charges_1": 0,
-                    "driver_charges_2": 0,
-                    "driver_earnings": 0,
-                    "override_driver_earnings": 0,
-                    "company_earnings": 0,
-                    "pay_to_driver": 0,
-                    "pay_to_company": 0,
-                    "company_report_income": 0,
-                    "company_report_income_vat": 0,
-                    "company_report_vat": 0,
-                    "percent_driver_total": 0
-                },
-                "Payment": {
-                    "payment_method": $scope.payment,
-                    "payment_status": "Pending"
-                }
+        $http({
+            method: 'POST',
+            url: 'https://api-test.insoftd.com/v1/operator/booking',
+            headers: {'Authorization': 'Basic aW50ZXJuc2hpcEBpbnNvZnRkZXYuY29tOmJhY2tvZmZpY2VAfEAyNDg='},
+            data:{
+                "BookingList": [{
+                    "Booking": {
+                        "id_car_type":4,
+                        "id_client": $sessionStorage.valueId,
+                        "order_number": "",
+                        "id_driver_to_car": null,
+                        "passenger_name": $sessionStorage.name,
+                        "passenger_email": $sessionStorage.email,
+                        "passenger_mobile": $sessionStorage.phone_number,
+                        "payment_method": "cash",
+                        "status": "Unallocated",
+                        "source": "backoffice",
+                        "infant_seats_number": 0,
+                        "child_seats_number": 0,
+                        "booster_seats_number": 0,
+                        "passengers_number": $scope.passenger,
+                        "pickup_address": "teest",
+                        "dropoff_address": "bbdfg",
+                        "pickup_time": "2020-8-31 12:11:00",
+                        "pickup_lat": orig_lat,
+                        "pickup_lng": orig_long,
+                        "dropoff_lat": dest_lat,
+                        "dropoff_lng": dest_long,
+                        "duration": $sessionStorage.duration,
+                        "journey_distance": $sessionStorage.distance,
+                        "waiting_time": 0,
+                        "journey_type": "asap",
+                        "booking_type": 1,
+                        "cancel_reason": null,
+                        "id_pickup_zone": "791",
+                        "id_dropoff_zone": "791",
+                        "pickup_details": "",
+                        "dropoff_details": ""
+                    },
+                    "BookingCharge": {
+                        "extra_card_payment": 0,
+                        "base_journey_charge": 17.01,
+                        "driver_base_journey_charge": 0,
+                        "extra_baby_seat": 0,
+                        "extra_stow": 5,
+                        "duration_charge": 0,
+                        "extra_waiting_time": 0,
+                        "extra_car_type": 0,
+                        "exception": 0,
+                        "time_frame": 17.01,
+                        "cash": $sessionStorage.price,
+                        "credit": 0,
+                        "commission": 0,
+                        "discount": 0,
+                        "driver_tip": 0,
+                        "total_journey": $sessionStorage.price,
+                        "driver_total_journey": 0,
+                        "zone_extra_charge": 0,
+                        "voucher_discount": 0,
+                        "administration_fee": 5,
+                        "vat": 22.01,
+                        "driver_charges_1": 0,
+                        "driver_charges_2": 0,
+                        "driver_earnings": 0,
+                        "override_driver_earnings": 0,
+                        "company_earnings": 0,
+                        "pay_to_driver": 0,
+                        "pay_to_company": 0,
+                        "company_report_income": 0,
+                        "company_report_income_vat": 0,
+                        "company_report_vat": 0,
+                        "percent_driver_total": 0
+                    },
+                    "Payment": {
+                        "payment_method": $scope.payment,
+                        "payment_status": "Pending"
+                    }
 
-            }]
+                }]
 
-        }
+            }
+        }).then(function (data) {
 
-
-    }).then(function (data) {
-       
-        alert(data.data.records[0].result);
-    });
-}
-
-
+            alert(data.data.records[0].result);
+        });
+    }
 }]);

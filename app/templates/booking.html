@@ -91,17 +91,14 @@
                 <input id="to-address" type="text" ng-model="dest_input.text" class="validate" required>
             </div>
 
-<!--            <button id="buttonSend" class="button" type="button" ng-click="pret()"-->
-<!--                    ng-disabled="!payment || !passenger || !cars || !orig_input.text || !dest_input.text"> Calculate-->
-<!--            </button>-->
+            <button id="buttonSend" class="button" type="button" ng-click="pret()"
+                    ng-show="!payment || !passenger || !cars || !orig_input.text || !dest_input.text"> Calculate
+            </button>
         </div>
-            <p id="orig_latitude"></p>
-            <p id="orig_longitude"></p>
-            <p id="dest_latitude"></p>
-            <p id="dest_longitude"></p>
+
 
             <p id="distance" ng-bind="dista" ></p>
-            <p id="duration" ng-bind="durat" ></p>
+            <p id="duration" ng-bind="durata" ></p>
             <p id="price" ng-bind="pric"></p>
 
             <div class="input" ng-model="payment">
@@ -122,14 +119,17 @@
 
             <div class="space-top text-left">
                 <button ng-disabled="form-register.$invalid" class="waves-effect waves-light btn done">
-                    <i class="material-icons left" ng-click="purcase()" >Done</i>
+                    <i class="material-icons left" ng-click="purcase()" ng-disabled="!dista || !payment || !passenger || !cars || !orig_input.text || !dest_input.text"> Done</i>
                 </button>
             </div >
 
 
         </form>
     <div class="map" id="map"></div>
-
+    <p id="orig_latitude"></p>
+    <p id="orig_longitude"></p>
+    <p id="dest_latitude"></p>
+    <p id="dest_longitude"></p>
 
     </div>
 </div>

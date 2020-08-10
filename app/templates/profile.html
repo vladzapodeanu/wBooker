@@ -51,12 +51,12 @@
 
                 <div class="form-group">
                     <br><label for="nume">Nume</label></br>
-                    <input id="nume" type="text" class="validate" name="nume" required>
+                    <input id="nume" type="text" class="validate" name="nume" ng-model="nume" required>
                 </div>
 
                 <div class="form-group">
                 <br><label for="password">Password</label></br>
-                    <input type="password" class="validate" id="password" name="password" ng-model="password.text" ng-minlength='10'  required>
+                    <input type="password" class="validate" id="password" name="password" ng-model="password" ng-minlength='10'  required>
                 </div>
 
 
@@ -66,7 +66,7 @@
                 </div>
 
                 <div class="space-top text-left">
-                    <button ng-disabled="form-register.$invalid" class="waves-effect waves-light btn done">
+                    <button id="update" class="waves-effect ">
                         <i class="text-center" ng-click="update()" >Edit</i>
                     </button>
                 </div>

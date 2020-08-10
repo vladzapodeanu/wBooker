@@ -41,7 +41,7 @@
                 <div class="text-center">
                     <h1>My Booking</h1>
                 </div>
-                <div class="divBookings" ng-change="booking()"  ng-repeat="x in booking">
+                <div class="divBookings"  ng-repeat="x in booking">
                     <h1>Booking</h1>
                     <h2>From: {{x.from_adress}}</h2>
                     <h2>To: {{x.to_adress}}</h2>
@@ -49,6 +49,10 @@
                     <h2>Duration: {{x.duration}} min</h2>
                     <h2>Distance: {{x.distance}} km</h2>
                 </div>
+                <div class="containerMid">
+                    <button id="buttonChange" class="buttonLogin" type="button" ng-click="mybooking()">Show</button>
+                </div>
+
             </div>
         </div>
     </div>
