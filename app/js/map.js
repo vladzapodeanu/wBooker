@@ -1,4 +1,4 @@
-var orig_input, dest_input, orig_lat, orig_long, dest_lat, dest_long, total = 0;
+var orig_input, dest_input, orig_name, dest_name, orig_lat, orig_long, dest_lat, dest_long, total = 0;
 
 function initAutocomplete() {
     orig_input = new google.maps.places.Autocomplete(
@@ -26,6 +26,7 @@ function fillInAddressPickUp() {
     } else {
         orig_lat = place.geometry.location.lat();
         orig_long = place.geometry.location.lng();
+        // orig_name = place.address_components[0].long_name + ', ' + place.address_components[1].long_name + ', ' + place.address_components[4].long_name;
     }
 }
 
@@ -38,6 +39,7 @@ function fillInAddressDestination() {
     } else {
         dest_lat = place.geometry.location.lat();
         dest_long = place.geometry.location.lng();
+        // dest_name = place.address_components[0].long_name + ', ' + place.address_components[1].long_name + ', ' + place.address_components[4].long_name;
     }
 }
 
@@ -72,7 +74,7 @@ function calculateAndDisplayRoute(directionsService, directionsRenderer) {
         },
         function (response, status) {
             if (status === 'ZERO_RESULTS') {
-                window.alert('Nici o rută nu a putut fi găsită între origine și destinație pentru Masina');
+                window.alert('Nu exista ruta!');
             } else if (status === 'OK') {
                 directionsRenderer.setDirections(response);
                 computeTotalDistance(directionsRenderer.getDirections());
@@ -95,5 +97,5 @@ function computeTotalDistance(result) {
     document.getElementById("orig_longitude").innerHTML = "Longitudine Origine: " + orig_long;
     document.getElementById("dest_latitude").innerHTML = "Latitudine Destinatie: " + dest_lat;
     document.getElementById("dest_longitude").innerHTML = "Longitudine Destinatie: " + dest_long;
-    document.getElementById("pret").innerHTML = "Pret: " + total + "Lei";
+    document.getElementById("price").innerHTML = "Pret: " + total + "Lei";
 }

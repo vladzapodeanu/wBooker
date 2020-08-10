@@ -61,62 +61,53 @@
                 <br><label for="email">Email address</label></br>
                 <input id="email" type="email" class="form-control" name="type"  ng-model="email.text" >
             </div>
-
-            <div class="input">
-                <label for="passenger"><p>Numar pasageri</p></label>
-                    <div class="select-container">
-                        <select  id="passenger" name="passenger" ng-model="passenger" type="text">
-                            <option value="1" >1</option>
-                            <option value="2">2</option>
-                            <option value="3" >3</option>
-                            <option value="4">4</option>
-                            <option value="5" >5</option>
-                            <option value="6">6</option>
-                        </select>
-                    </div>
+            <div class="row">
+                <div class="input">
+                    <label for="passenger"><p>Numar pasageri</p></label>
+                    <input id="passenger" name ="passenger" placeholder="Passenger number..." type="text"
+                           ng-change="checkcars()" ng-model="passenger"/>
+                </div>
             </div>
             <div class="input" >
-               <label for="car"><p>Tip masina</p></label>
-                 <div class="select-container">
-                       <select  id="car" name="car" ng-model="cartype" type="text">
-                           <option value="car_1" >Masina tip 1</option>
-                           <option value="car_2">Masina tip 2</option>
-                      </select>
-                    </div>
-               <button ng-disabled="form-register.$invalid" class="waves-effect waves-light btn done">
-                    <i class="material-icons left"  ng-click="checkcars()" >Check</i>
-                </button>
+               <label for="selectcard"><p>Tip masina</p></label>
+                <select class="selectVehicle" id="selectcard" name="cars" type="text" ng-model="cars">
+
+                    <option ng-repeat="x in carTypes track by $index" value="{{x.id_car_type}}"
+                            ng-if="x.seats_number > passenger">{{x.type}} - {{x.seats_number}} locuri
+                    <option value="1">TIP 1</option>
+                    </option>
+                </select>
+
             </div>
 
 
             <div class="input">
                 <br><label for="from-address">From address</label></br>
-                <input id="from-address" type="text" class="validate" required>
+                <input id="from-address" type="text" ng-model="orig_input.text" class="validate" required>
             </div>
 
             <div class="input">
                 <br><label for="to-address">To address</label></br>
-                <input id="to-address" type="text" class="validate" required>
+                <input id="to-address" type="text" ng-model="dest_input.text" class="validate" required>
             </div>
 
-            <button ng-disabled="form-register.$invalid" class="input">
-                <i class="material-icons left" ng-click="pret()" >Calculate</i>
-            </button>
+<!--            <button id="buttonSend" class="button" type="button" ng-click="pret()"-->
+<!--                    ng-disabled="!payment || !passenger || !cars || !orig_input.text || !dest_input.text"> Calculate-->
+<!--            </button>-->
         </div>
             <p id="orig_latitude"></p>
             <p id="orig_longitude"></p>
             <p id="dest_latitude"></p>
             <p id="dest_longitude"></p>
 
-            <p id="distance"></p>
-            <p id="duration"></p>
-            <p id="pret"></p>
-            <p id="pret_2"></p>
+            <p id="distance" ng-bind="dista" ></p>
+            <p id="duration" ng-bind="durat" ></p>
+            <p id="price" ng-bind="pric"></p>
 
-            <div class="input">
+            <div class="input" ng-model="payment">
                 <br>Payment method</br>
                 <div class="text-center">
-                    <input type="radio" name="payment" id="changemode-card"  checked="checked" class="validate" required>
+                    <input type="radio" name="payment" id="changemode-card"   checked="checked" class="validate" required>
                     <label for="changemode-card"> Card</label>
                 </div>
                 <div class="text-center">

@@ -5,6 +5,8 @@ const path = require('path');
 
 const app = express();
 
+
+
 var corsOptions = {
     origin: "http://localhost:8081"
 };
@@ -36,10 +38,6 @@ db.sequelize.sync();
 //     res.json({ message: "Welcome to booker application." });
 // });
 
-var http = require('http').createServer(app);
-
-var serverAddress = 'https://notify.insoftd.com:9910';
-var companyID = 248
 
 app.get('/', function(req, res) {
     res.sendFile(path.resolve('app/index.html'));

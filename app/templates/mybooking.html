@@ -18,7 +18,7 @@
 
 
 <body class="container_app"  ng-app="eventsApp">
-<div class="container" ng-controller="MyController"  data-ng-init="MyBooking()">
+<div class="container" ng-controller="MyController"  >
     <div class="collapse navbar-collapse" id="navbarNav">
         <ngb-ul class="navbar-nav ">
             <ngb-li class="nav-item">
@@ -41,37 +41,13 @@
                 <div class="text-center">
                     <h1>My Booking</h1>
                 </div>
-                <div>
-                    <form class="form-group" method="post" name="register" novalidate>
-                        <div class="form-group">
-                            <br><label for="from-address">From address</label></br>
-                            <input id="from-address" type="text" class="validate" required>
-                        </div>
-
-                        <div class="form-group">
-                            <br><label for="to-address">To address</label></br>
-                            <input id="to-address" type="text" class="validate" required>
-                        </div>
-                        <div class="form-group">
-                            <br><label for="distance">Distance</label></br>
-                            <input id="distance" type="text" class="validate" required>
-                        </div>
-                        <div class="form-group">
-                            <br><label for="duration">Duration</label></br>
-                            <input id="duration" type="text" class="validate" required>
-                        </div>
-                        <div class="form-group">
-                            <br><label for="price">Price</label></br>
-                            <input id="price" type="text" class="validate" required>
-                        </div>
-
-                        <div class="space-top text-left">
-                            <button ng-disabled="form-register.$invalid" class="waves-effect waves-light btn done">
-                                <i class="text-center" ng-click="initMyProfile()" >Update</i>
-                            </button>
-                        </div>
-
-                    </form>
+                <div class="divBookings" ng-change="booking()"  ng-repeat="x in booking">
+                    <h1>Booking</h1>
+                    <h2>From: {{x.from_adress}}</h2>
+                    <h2>To: {{x.to_adress}}</h2>
+                    <h2>Price: {{x.price}}$</h2>
+                    <h2>Duration: {{x.duration}} min</h2>
+                    <h2>Distance: {{x.distance}} km</h2>
                 </div>
             </div>
         </div>
