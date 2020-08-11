@@ -88,7 +88,7 @@ $scope.initMyProfile = function () {
 
     $http({
         method: 'GET',
-        url: '/api/user/' + user_id,
+        url: '/api/user/',
 
     }).then(function successCallback(response) {
 
