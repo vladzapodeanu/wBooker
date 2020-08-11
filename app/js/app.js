@@ -51,9 +51,7 @@ $scope.connect= function(){
         else{
             if(response.data[0].password === $scope.password.text){
                 $sessionStorage.valueemail = $scope.email.text;
-                $sessionStorage.valueId = response.data[0].id_user;
-                $sessionStorage.name = response.data[0].name;
-                $sessionStorage.phone_number = response.data[0].phone_number;
+
                 window.location.assign("http://localhost:8080/booking");
             }
             else{
@@ -133,7 +131,7 @@ $scope.createBooking = function () {
     console.log(dest_input);
     console.log(user_id);
     console.log(total);
-    console.log(duration.text);
+    console.log(duration);
     console.log($scope.payment);
 
     $http({
@@ -146,7 +144,7 @@ $scope.createBooking = function () {
             'distance': total,
             'price': total,
             'duration': 123,
-            'payment_method': $scope.payment,
+            'payment_method': "cash",
             'status': 'pending'
         }
     }).then(function successCallback(response) {
@@ -237,7 +235,7 @@ $scope.pret =function () {
                             "child_seats_number": 0,
                             "booster_seats_number": 0,
                             "id_client": 4,
-                            "pickup_time": "2020-08-29 11:42:00",
+                            "pickup_time": "2023-08-29 11:42:00",
                             "passengers_number": 1,
                             "payment_method": "cash",
                             "waiting_time": 0,
@@ -248,7 +246,7 @@ $scope.pret =function () {
             }
         }).then(function (data) {
 
-
+            console.log("merge");
         $scope.pric = "Pret: " + data.data.records.total_price + " $.";
         $sessionStorage.price = data.data.records.total_price;
 
@@ -266,7 +264,7 @@ $scope.pret =function () {
                 "BookingList": [{
                     "Booking": {
                         "id_car_type":4,
-                        "id_client": $sessionStorage.valueId,
+                        "id_client": 1,
                         "order_number": "",
                         "id_driver_to_car": null,
                         "passenger_name": $sessionStorage.name,
@@ -279,9 +277,9 @@ $scope.pret =function () {
                         "child_seats_number": 0,
                         "booster_seats_number": 0,
                         "passengers_number": $scope.passenger,
-                        "pickup_address": "teest",
-                        "dropoff_address": "bbdfg",
-                        "pickup_time": "2020-8-31 12:11:00",
+                        "pickup_address": "merge",
+                        "dropoff_address": "merge",
+                        "pickup_time": "2023-8-31 12:11:00",
                         "pickup_lat": orig_lat,
                         "pickup_lng": orig_long,
                         "dropoff_lat": dest_lat,

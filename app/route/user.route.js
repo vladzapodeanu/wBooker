@@ -9,7 +9,7 @@ module.exports = app => {
     //router.post("/", user.create);
 
     // Update a Tutorial with id
-    router.put("/:id", user.update);
+    router.put("/", user.update);
 
 
     app.use('/api/user', router);
