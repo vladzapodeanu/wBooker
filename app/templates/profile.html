@@ -21,8 +21,8 @@
 
 
 <body class="container_app" ng-app="eventsApp" >
-<div class="container"  ng-controller="MyController">
-    <div class=" navbar-collapse" id="navbarNav">
+<div class="container"  ng-controller="MyController" data-ng-init="initMyProfile()">
+    <div class="navbar-collapse" id="navbarNav">
         <ngb-ul class="navbar-nav ">
             <ngb-li class="nav-item">
                 <a class="nav-link" href="/login" >Login</a>
@@ -51,7 +51,7 @@
 
                 <div class="form-group">
                     <br><label for="nume">Nume</label></br>
-                    <input id="nume" type="text" class="validate" name="nume" ng-model="nume" required>
+                    <input id="nume" type="text" class="validate" name="name" ng-model="name" required>
                 </div>
 
                 <div class="form-group">
@@ -62,7 +62,7 @@
 
                 <div class="form-group">
                     <br><label for="email">Email address</label></br>
-                    <input id="email" type="email" class="validate" name="email" ng-model="email.text"  required>
+                    <input id="email" type="email" class="validate" name="email" ng-model="emailprofile"  required>
                 </div>
 
                 <div class="space-top text-left">

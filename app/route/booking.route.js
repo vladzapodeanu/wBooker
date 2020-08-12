@@ -6,10 +6,10 @@ module.exports = app => {
     router.get("/", booking.findAll);
 
     // Create a new Tutorial
-   router.post("/", booking.create);
+    router.post("/create", booking.create);
 
     // Update a Tutorial with id
-    router.put("/:id", booking.update);
+    router.get("/:id_booking", booking.findOne);
 
 
     app.use('/api/booking', router);

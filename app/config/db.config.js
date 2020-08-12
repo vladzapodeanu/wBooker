@@ -2,7 +2,7 @@ module.exports = {
     database: 'webbooker',
     username: 'root',
     password: 'root',
-    host: 'localhost',
+    host: '127.0.0.1',
     port: 3306,
     dialect: 'mysql',
     dialectOptions: {

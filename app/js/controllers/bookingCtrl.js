@@ -33,24 +33,19 @@ exports.create = (req, res) => {
 
     // Create a Tutorial
     const booking = {
-        id_booking: req.body.id_booking,
-        id_company: req.body.id_company,
+        id_account: 4,
+        id_company: 1,
         id_user: req.body.id_user,
-        id_driver: req.body.id_driver,
-        id_cartype: req.body.id_cartype,
-        from_address: req.body.from_address,
-        to_address: req.body.to_address,
+        id_driver: 1,
+        id_cartype: 1,
+        from_adress: req.body.from_adress,
+        to_adress: req.body.to_adress,
         distance: req.body.distance,
-        duration: req.body.duration,
         price: req.body.price,
+        duration: req.body.duration,
         payment_method: req.body.payment_method,
-        created_at: req.body.created_at,
-        updated_at: req.body.updated_at,
         status: req.body.status,
-        driver_on_the_way: req.body.driver_on_the_way,
-        driver_at_pickup: req.body.driver_at_pickup,
-        passenger_on_bord: req.body.passenger_on_bord,
-        done: req.body.done,
+        done: 0
     };
 
     // Save Tutorial in the database
@@ -66,26 +61,19 @@ exports.create = (req, res) => {
         });
 };
 // Update a Tutorial by the id in the request
-exports.update = (req, res) => {
-    const id = req.params.id_booking;
-
-    Booking.update(req.body, {
-        where: { id_booking: id }
+exports.findOne = (req, res) => {
+    return Booking.findAll({
+        where: {
+            id_user: req.params.id_user
+        },
+        attributes: { exclude: ["createdAt", "updatedAt"] }
     })
-        .then(num => {
-            if (num == 1) {
-                res.send({
-                    message: "Booking was updated successfully."
-                });
-            } else {
-                res.send({
-                    message: `Cannot update Booking with id=${id}. Maybe Booking was not found or req.body is empty!`
-                });
+        .then(booking => {
+                if(!Booking){
+                    return res.status(404).json({message: "user Not Found"})
+                }
+                return res.status(200).json(Booking)
             }
-        })
-        .catch(err => {
-            res.status(500).send({
-                message: "Error updating Booking with id=" + id
-            });
-        });
-};
+        )
+        .catch(error => res.status(400).send(error));
+}

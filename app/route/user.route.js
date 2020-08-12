@@ -6,10 +6,15 @@ module.exports = app => {
     router.get("/", user.findAll);
 
     // Create a new Tutorial
-    //router.post("/", user.create);
+    router.post("/create", user.create);
+
+    router.get('/:id_user', user.findOne);
+
+
+    router.get('/userEmail/:email', user.findByEmail);
 
     // Update a Tutorial with id
-    router.put("/", user.update);
+    router.put("/:id_user", user.update);
 
 
     app.use('/api/user', router);

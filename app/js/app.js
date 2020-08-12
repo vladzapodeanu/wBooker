@@ -34,8 +34,7 @@ eventsApp.controller('MyController', ['$scope', '$http','$localStorage','$sessio
 $scope.carTypes={
     };
 $scope.email = {
-    text: 'ionica@gmail.com'
-};
+   };
 $scope.phonenumber = {
     pattern: /^\+?\d{10}$/,
 
@@ -43,19 +42,19 @@ $scope.phonenumber = {
 $scope.connect= function(){
     $http({
         method: 'GET',
-        url: '/api/user/'
+        url: '/api/user/userEmail/' + $scope.email.text
     }).then(function successCallback(response) {
-        if(angular.isUndefined(response.data[0])){
-            alert("Email doesn't exist in database!");
-        }
-        else{
-            if(response.data[0].password === $scope.password.text){
-                $sessionStorage.valueemail = $scope.email.text;
-
+        if (angular.isUndefined(response.data[0])) {
+            alert("Email-ul nu este in baza de date");
+        } else {
+            if (response.data[0].password === $scope.password.text) {
+                $sessionStorage.valueEmail = $scope.email.text;
+                $sessionStorage.valueId = response.data[0].id_user;
+                $sessionStorage.name = response.data[0].name;
+                $sessionStorage.phone_number = response.data[0].phone_number;
                 window.location.assign("http://localhost:8080/booking");
-            }
-            else{
-                alert("Wrong password!");
+            } else {
+                alert("Parola Gresita!");
             }
         }
     }, function errorCallback(response) {
@@ -86,15 +85,15 @@ $scope.initMyProfile = function () {
 
     $http({
         method: 'GET',
-        url: '/api/user/',
+        url: '/api/user/' + user_id
 
     }).then(function successCallback(response) {
 
         $scope.name = response.data[0].name;
-        $scope.email = response.data[0].email;
+        $scope.emailprofile = response.data[0].email;
         $scope.password = response.data[0].password;
 
-        console.log(response);
+
     }, function errorCallback(response) {
         console.log("error");
     });
@@ -106,16 +105,16 @@ $scope.update = function(){
     var user_id = $sessionStorage.valueId;
     $http({
         method: 'PUT',
-        url: '/api/user/' ,
+        url: '/api/user/' + user_id ,
         data: {
 
             'name': $scope.name,
-            'email': $scope.email.text,
+            'email': $scope.emailprofile,
             'password': $scope.password
 
         }
     }).then(function successCallback(response) {
-        $sessionStorage.valueToShare = $scope.email.text;
+        $sessionStorage.valueToShare = $scope.emailprofile;
         console.log($sessionStorage.valueToShare);
         email = $sessionStorage.valueToShare;
 
