@@ -171,13 +171,13 @@ $scope.pret =function () {
             "startPoint": {
                 "lat": orig_lat,
                 "lng": orig_long,
-                "address": ""
+                "address": orig_name
 
             },
             "endPoint": {
                 "lat": dest_lat,
                 "lng": dest_long,
-                "address": ""
+                "address": dest_name
             },
             "wayPoints": [],
             "app": "backoffice"
@@ -192,6 +192,7 @@ $scope.pret =function () {
 
             $sessionStorage.distance = $scope.route[i].details.distance;
             $sessionStorage.duration = $scope.route[i].details.duration;
+            $sessionStorage.passenger = $scope.route[i].details.passenger;
         }
     $http({
             method: 'POST',
@@ -216,13 +217,13 @@ $scope.pret =function () {
                             "points_list": [
                                 {
                                     "type": "p",
-                                    "address": "",
+                                    "address": orig_name,
                                     "lat": orig_lat,
                                     "lng": orig_long
                                 },
                                 {
                                     "type": "d",
-                                    "address": "",
+                                    "address": dest_name,
                                     "lat": dest_lat,
                                     "lng": dest_long
                                 }
@@ -240,7 +241,7 @@ $scope.pret =function () {
                             "waiting_time": 0,
                             "voucher_code": null
                         }
-                    },
+                    }
                 ]
             }
         }).then(function (data) {
@@ -269,15 +270,15 @@ $scope.pret =function () {
                         "passenger_name": $sessionStorage.name,
                         "passenger_email": $sessionStorage.email,
                         "passenger_mobile": $sessionStorage.phone_number,
-                        "payment_method": "cash",
+                        "payment_method": $scope.payment,
                         "status": "Unallocated",
                         "source": "backoffice",
                         "infant_seats_number": 0,
                         "child_seats_number": 0,
                         "booster_seats_number": 0,
                         "passengers_number": $scope.passenger,
-                        "pickup_address": "merge",
-                        "dropoff_address": "merge",
+                        "pickup_address": orig_name,
+                        "dropoff_address": dest_name,
                         "pickup_time": "2023-8-31 12:11:00",
                         "pickup_lat": orig_lat,
                         "pickup_lng": orig_long,

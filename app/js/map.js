@@ -26,7 +26,7 @@ function fillInAddressPickUp() {
     } else {
         orig_lat = place.geometry.location.lat();
         orig_long = place.geometry.location.lng();
-        // orig_name = place.address_components[0].long_name + ', ' + place.address_components[1].long_name + ', ' + place.address_components[4].long_name;
+        orig_name = place.address_components[0].long_name + ', ' + place.address_components[1].long_name + ', ' + place.address_components[4].long_name;
     }
 }
 
@@ -39,7 +39,7 @@ function fillInAddressDestination() {
     } else {
         dest_lat = place.geometry.location.lat();
         dest_long = place.geometry.location.lng();
-        // dest_name = place.address_components[0].long_name + ', ' + place.address_components[1].long_name + ', ' + place.address_components[4].long_name;
+        dest_name = place.address_components[0].long_name + ', ' + place.address_components[1].long_name + ', ' + place.address_components[4].long_name;
     }
 }
 
